@@ -1,0 +1,15 @@
+@WebApplication4_HostAddress = http://localhost:5217
+
+GET {{WebApplication4_HostAddress}}/api/expenses
+Accept: application/json
+
+###
+
+GET {{WebApplication4_HostAddress}}/api/expenses/1
+Accept: application/json
+
+###
+
+POST {{WebApplication4_HostAddress}}/api/expenses
+Accept: application/json
+
