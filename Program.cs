@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication4.Data;
+using WebApplication4.Repositories;
+using WebApplication4.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddControllers();
+
+// Contract lengths registration
+builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
