@@ -6,4 +6,5 @@ namespace WebApplication4.Data;
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Expense> Expenses { get; set; }
+    public DbSet<Department> Departments { get; set; }
 }
