@@ -16,6 +16,18 @@ builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+// Add CORS services
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Client", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173") // React dev server
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
@@ -26,6 +38,9 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+// Enable CORS
+app.UseCors("Client");
 
 app.UseHttpsRedirection();
 
