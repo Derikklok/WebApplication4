@@ -1,0 +1,3 @@
+﻿dotnet ef migrations add AddDepartments
+
+dotnet ef database update
