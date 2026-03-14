@@ -1,4 +1,36 @@
-﻿
+﻿    [HttpPost]
+    public async Task<IActionResult> CreateDepartment([FromBody] Department department)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var created = await _service.CreateAsync(department);
+
+        return CreatedAtAction(nameof(GetDepartment), new { id = created.Id }, created);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateDepartment(int id, Department department)
+    {
+        var updated = await _service.UpdateAsync(id, department);
+
+        if (!updated)
+            return NotFound();
+
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteDepartment(int id)
+    {
+        var deleted = await _service.DeleteAsync(id);
+
+        if (!deleted)
+            return NotFound();
+
+        return NoContent();
+    }
+}
 
 
 
